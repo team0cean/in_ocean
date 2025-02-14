@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IN_OCEAN : INFO</title>
+    <link rel="icon" href="favicon green.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Pretendard', sans-serif;
+            background-color: #000;
+            color: #ffe680;
+        }
+
+        .hero-section {
+            position: relative;
+            width: 100%;
+            min-height: 70vh;
+            background: url('background-plain.png') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: -5px;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 35px;
+            right: 80px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            z-index: 10;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar ul li {
+            font-size: 20px;
+            color: #ffe680;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li:hover {
+            color: white;
+        }
+
+        .navbar ul li a {
+            text-decoration: none; /* 기본 밑줄 제거 */
+            color: inherit; /* 부모 색상 상속 */
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: white; /* 호버 시 흰색으로 변경 */
+        }
+
+        #passwordOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .password-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .password-container h2 {
+            margin-bottom: 10px;
+        }
+
+        .password-container input {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .password-container button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #ffe680;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .password-container button:hover {
+            background-color: #b5dbb3;
+        }
+        
+        #passwordOverlay p {
+            margin-top: 15px;
+            color: red;
+            display: none;
+        }
+
+        .hero-text {
+            text-align: left;
+            position: relative;
+            margin-left: 100px;
+        }
+
+        .hero-text h1 {
+            font-size: 100px;
+            font-weight: bold;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        #content {
+            margin-top: 0;
+            text-align: left;
+            background-color: white;
+            color: black;
+            padding: 50px 20px;
+            box-sizing: border-box;
+        }
+
+        .section {
+            margin: 20px auto;
+            max-width: 800px;
+            line-height: 1.6;
+            font-size: 17px;
+            text-align: left;
+            margin-left: 100px; /* 왼쪽 정렬 */
+        }
+
+        .section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .section h3 {
+            font-size: 20px;
+            margin-top: 30px;
+            margin-bottom: 7px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid grey;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #ffe680;
+        }
+
+        a {
+            text-decoration: none; /* 기본 언더라인 제거 */
+            color: inherit; /* 부모 요소의 색상 상속 */
+        }
+
+        a:hover {
+            text-decoration: underline; /* 호버 시 언더라인 추가 */
+        }
+
+        a:visited {
+            color: inherit; /* 방문한 링크의 색상도 기본 색상 유지 */
+        }
+
+        .divider {
+            margin: 40px auto; /* 위아래 여백을 주고, 양옆 여백을 auto로 설정 */
+            width: 95%; /* 전체 너비의 80%로 설정 (조정 가능) */
+            border: none;
+            height: 2px;
+            background-color: #ccc;
+        }
+
+
+        .new-section {
+            margin-top: 20px;
+            text-align: left;
+            margin-left: 100px; /* 왼쪽 정렬 */
+            margin-right: 100px;
+        }
+
+        .new-section h2 {
+            font-size: 28px;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        .new-section a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .new-section a:hover {
+            text-decoration: underline;
+        }
+
+        .new-section a img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .link-container {
+            display: flex;
+            justify-content: space-between; /* 각 컬럼 간 간격 균등 */
+            gap: 20px; /* 컬럼 간의 간격 */
+        }
+
+        .link-category {
+            flex: 1; /* 각 컬럼을 동일한 비율로 분할 */
+            min-width: 150px;
+            padding: 0 20px; /* 내부 여백 */
+            border-left: 2px dotted #ccc; /* 왼쪽 점선 */
+        }
+
+        .link-category h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .link-category a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .link-category a:hover {
+            text-decoration: underline;
+        }
+
+        .link-category a img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .scroll-to-top, .back-to-home {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .back-to-home {
+            bottom: 20px;
+        }
+
+        .scroll-to-top button, .back-to-home button {
+            background-color: #ffe680;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .scroll-to-top button:hover, .back-to-home button:hover {
+            background-color: #b5dbb3;
+        }
+    </style>
+    <script>
+        // 오른쪽 클릭 방지
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // 텍스트 선택 방지
+        document.addEventListener('selectstart', (e) => e.preventDefault());
+
+        function goHome() {
+            window.location.href = 'index.html'; // 홈 페이지 경로
+        }
+
+        const CORRECT_PASSWORD = "ocean"; // 비밀번호 설정
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+
+            if (input === CORRECT_PASSWORD) {
+                document.getElementById('passwordOverlay').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            } else {
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        // Enter 키로 Submit 버튼 클릭
+        document.addEventListener('DOMContentLoaded', () => {
+            const passwordInput = document.getElementById('passwordInput');
+            const submitButton = document.querySelector('.password-container button');
+
+            passwordInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    submitButton.click();
+                }
+            });
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</head>
+<body>
+    <!-- 비밀번호 입력 화면 -->
+    <div id="passwordOverlay">
+        <div class="password-container">
+            <h2 style="color: black;">Enter Password</h2>
+            <input type="password" id="passwordInput" placeholder="Enter password">
+            <button onclick="checkPassword()">Submit</button>
+            <p id="errorMessage" style="color: red; display: none;">Wrong Password. Please Try Again.</p>
+        </div>
+    </div>
+
+    <div class="hero-section">
+        <div class="navbar">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="info.html">INFO</a></li>
+                <li><a href="archive.html">ARCHIVE</a></li>
+                <li><a href="dive.html">DIVE</a></li>
+                <li><a href="vibe.html">VIBE</a></li>
+            </ul>
+        </div>
+        <div class="hero-text">
+            <h1>INFO</h1>
+            <p>TEAM OCEAN'S FREQUENTLY USED INFO</p>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="section">
+            <h2>현대차 방문등록</h2>
+            <p>
+                <a href="https://visitmain.hyundai.com/index.html" target="_blank">
+                   <img src="link.png" alt="아이콘" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 3px;">
+                   현대차 방문등록 링크
+            </a>
+             </p>
+            <table>
+                <tr>
+                    <th>이름</th>
+                    <th>생년월일</th>
+                    <th>전화번호</th>
+                    <th>노트북 기종</th>
+                    <th>노트북 정보</th>
+                </tr>
+                <tr>
+                    <td>김한진 그룹장</td>
+                    <td>810528</td>
+                    <td>010-9014-5028</td>
+                    <td>삼성 노트북</td>
+                    <td>NT951XDB / 597N9FHT700034A</td>
+                </tr>
+                <tr>
+                    <td>김아영 팀장</td>
+                    <td>900801</td>
+                    <td>010-6782-2349</td>
+                    <td>LG 노트북</td>
+                    <td>3YEW9FHN900011R</td>
+                </tr>
+                <tr>
+                    <td>권유진 시니어매니저</td>
+                    <td>940329</td>
+                    <td>010-2825-0283</td>
+                    <td>맥북 프로</td>
+                    <td>C02YG4UNJG5J</td>
+                </tr>
+                <tr>
+                    <td>황재희 시니어매니저</td>
+                    <td>921214</td>
+                    <td>010-5035-9236</td>
+                    <td>맥북</td>
+                    <td>XTH2PTY21W</td>
+                </tr>
+                <tr>
+                    <td>유기환 시니어매니저</td>
+                    <td>930804</td>
+                    <td>010-4161-8701</td>
+                    <td>삼성 노트북</td>
+                    <td>5T2E9FCW300013L</td>
+                </tr>
+            </table>
+            <h3>방문등록 GUIDE</h3>
+            <p> 순서: [강남대로] > [방문신청하기] > [방문자 등록 정보 입력] </p>
+            <p> 방문 부서 및 담당자: GMP 업무 - 제네시스브랜드마케팅기획팀,안성진 / BMS 업무 - 제네시스커뮤니케이션팀,이현성 </p>
+            <p> 그 외의 경우는 따로 지정해주시는 부서 및 담당자로 설정 (띄어쓰기 없이 기입) </p>
+        </div>
+        <hr class="divider">
+        <div class="new-section">
+            <h2>자주 쓰는 링크</h2>
+            <div class="link-container">
+                <div class="link-category">
+                    <h3>Team Ocean</h3>
+                    <a href="https://calendar.google.com/calendar/u/0/r/month/2025/1/1?cid=117879790b0ec59adf2a42125606364116f7b1767ce7ff7a933d84894308c674%40group.calendar.google.com" target="_blank">
+                       <img src="Google_Calendar_icon_(2020).svg.png" alt="Link Icon"> Team Ocean Calendar
+                    </a>
+                    <a href="https://docs.google.com/spreadsheets/d/1E-9-vHUIiIDyc5VZMXRmdwMsiSEJ7Fh8GWUo7KdGJyA/edit?gid=516658993#gid=516658993" target="_blank">
+                        <img src="Google_Sheets_logo_(2014-2020).svg.png" alt="Link Icon"> 2025 Team Ocean
+                    </a>
+                </div>
+
+                <div class="link-category">
+                    <h3>GENESIS</h3>
+                    <a href="https://drive.google.com/drive/folders/1Rn3X1st29GrolQlqLADd41oVlbRjiTE4" target="_blank">
+                       <img src="Google_Drive_icon_(2020).svg.png" alt="Link Icon"> GDF 참고 자료
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/14_Aj1mPqr1iBiFnI8uCcg4Fip-2YQZLH" target="_blank">
+                       <img src="Google_Drive_icon_(2020).svg.png" alt="Link Icon"> 제네시스 마케팅 자료
+                    </a>
+                </div>
+
+                <div class="link-category">
+                    <h3>Other Projects</h3>
+                    <a href="https://drive.google.com/drive/folders/1RIMUl44rrda_v0gRBjCn-5_wl5r_QRbZ" target="_blank">
+                        <img src="Google_Drive_icon_(2020).svg.png" alt="Link Icon"> Merchandise 자료
+                    </a>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <div class="scroll-to-top">
+        <button onclick="scrollToTop()">↑</button>
+    </div>
+    <div class="back-to-home">
+        <button onclick="goHome()">Back to Home</button>
+    </div>
+</body>
+</html>

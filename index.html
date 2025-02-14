@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IN_OCEAN</title>
+    <link rel="icon" href="favicon green.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+    <style>
+        @font-face {
+            font-family: 'Cafe24ClassicType-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Cafe24ClassicType-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Pretendard', sans-serif;
+            background-color: #000;
+            color: #ffe680;
+        }
+
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('background 5.png') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 35px;
+            right: 80px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            z-index: 10;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar ul li {
+            font-size: 20px;
+            color: #ffe680;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li:hover {
+            color: white;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .hero-text {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 260px;
+            font-weight: bold;
+            color: #ffe680;
+            line-height: 1.2;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 25px;
+            margin: 20px 0;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 400px;
+        }S
+
+        .hero-text p strong {
+            font-weight: bold;
+            color: white;
+        }
+
+        .hero-text .btn {
+            padding: 10px 30px;
+            font-size: 22px;
+            color: white;
+            border: 2px solid white;
+            border-radius: 30px;
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+            margin-top: 400px;
+        }
+
+        .hero-text .btn:hover {
+            background: white;
+            color: black;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 999;
+        }
+
+        .popup-image {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: auto;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .custom-font {
+            font-family: 'Cafe24ClassicType-Regular', sans-serif; /* 원하는 글씨체로 변경 */
+            font-size: 25px; /* 필요 시 크기 조정 */
+        }
+    </style>
+    <script>
+
+        // 오른쪽 클릭 방지
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // 텍스트 선택 방지
+        document.addEventListener('selectstart', (e) => e.preventDefault());
+        
+        function showPopup() {
+            document.getElementById('popupImage').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function hidePopup() {
+            document.getElementById('popupImage').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="navbar">
+            <ul>
+                <li><a href="info.html">INFO</a></li>
+                <li><a href="archive.html">ARCHIVE</a></li>
+                <li><a href="dive.html">DIVE</a></li>
+                <li><a href="vibe.html">VIBE</a></li>
+            </ul>
+        </div>
+
+        <div class="hero-text">
+            <button class="btn custom-font" onclick="showPopup()">Feel Free to Navigate</button>
+            <link href="https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Cafe24ClassicType-Regular.woff2" rel="stylesheet">
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="hidePopup()"></div>
+    <img src="popup-final.png" alt="Ocean Popup" id="popupImage" class="popup-image">
+
+</body>
+</html>
