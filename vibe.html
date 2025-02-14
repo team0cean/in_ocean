@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IN_OCEAN : ARCHIVE</title>
+    <link rel="icon" href="favicon green.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+    <style>
+        /* 기본 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Pretendard', sans-serif;
+            background-color: white;
+            color: #ffe680;
+        }
+
+        .hero-section {
+            position: relative;
+            width: 100%;
+            min-height: 70vh;
+            background: url('./background-plain.png') repeat-x center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: -5px;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 35px;
+            right: 80px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            z-index: 10;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar ul li {
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: white;
+        }
+
+        .hero-text {
+            text-align: left;
+            position: relative;
+            margin-left: 100px;
+        }
+
+        .hero-text h1 {
+            font-size: 100px;
+            font-weight: bold;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        #content {
+            margin-top: 0;
+            text-align: left;
+            background-color: white;
+            color: black;
+            padding: 50px 20px;
+            box-sizing: border-box;
+            margin-bottom: 80px;
+        }
+
+        .section {
+            margin: 20px auto;
+            max-width: 800px;
+            line-height: 1.6;
+            font-size: 20px;
+            text-align: left;
+            margin-left: 100px;
+            margin-bottom: 100px;
+        }
+
+        .section h2 {
+            font-size: 40px;
+            color: black;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .image-container {
+            flex-shrink: 0;
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+            width: 1000px;
+            height: auto;
+        }
+
+        .custom-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: none;
+        }
+
+        .overlay-icon {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icon {
+            width: 30px;
+            height: 30px;
+            opacity: 0.9;
+            margin-top: 5px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .tooltip {
+            position: fixed;
+            top: -150%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffe680;
+            color: #000;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            opacity: 0;
+            visibility: hidden;
+            white-space: nowrap;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 9999;
+        }
+
+        .icon-1 { top: 85%; left: 50%; }
+        .icon-2 { top: 27%; left: 52%; }
+        .icon-3 { top: 27%; left: 60%; }
+        .icon-4 { top: 78%; left: 56%; }
+        .icon-5 { top: 56%; left: 52%; }
+        .icon-6 { top: 72%; left: 48%; }
+        .icon-7 { top: 20%; left: 40%; }
+        .icon-8 { top: 13%; left: 55%; }
+        .icon-9 { top: 23%; left: 59%; }
+        .icon-10 { top: 84%; left: 69%; }
+
+        .image-and-text {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .text-box-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .text-box {
+            font-size: 15px;
+            width: 300px;
+            padding: 10px;
+            background-color: #FCEEB2;
+            color: black;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .text-box:hover {
+            background-color: #ffe680;
+            transform: scale(1.05);
+        }
+
+        a {
+            text-decoration: underline;
+            color: inherit;
+        }
+
+        a:hover {
+            color: orangered ;
+        }
+
+        a:visited {
+            color: inherit;
+        }
+
+        .divider {
+            margin: 40px auto;
+            width: 95%;
+            border: none;
+            height: 2px;
+            background-color: #ccc;
+        }
+
+        .new-section {
+            margin-top: 20px;
+            text-align: left;
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+
+        .new-section h2 {
+            font-size: 28px;
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+
+        .new-section a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .new-section a:hover {
+            text-decoration: underline;
+        }
+
+        .new-section a img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .pp-image {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+        }
+
+        .scroll-to-top, .back-to-home {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .back-to-home {
+            bottom: 20px;
+        }
+
+        .scroll-to-top button, .back-to-home button {
+            background-color: #ffe680;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .scroll-to-top button:hover, .back-to-home button:hover {
+            background-color: #b5dbb3;
+        }
+    </style>
+    <script>
+        // 오른쪽 클릭 방지
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // 텍스트 선택 방지
+        document.addEventListener('selectstart', (e) => e.preventDefault());
+
+        function goHome() {
+            window.location.href = 'index.html'; // 홈 페이지 경로
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const icons = document.querySelectorAll('.overlay-icon');
+            const textBoxes = document.querySelectorAll('.text-box');
+
+            function resetIconState(icon) {
+                const img = icon.querySelector('.icon');
+                img.style.opacity = '0.9';
+                img.style.transform = 'scale(1)';
+            }
+
+            icons.forEach((icon, index) => {
+                const tooltip = document.getElementById(`tooltip-${index + 1}`);
+
+                icon.addEventListener('mouseenter', () => {
+                    const img = icon.querySelector('.icon');
+                    img.style.opacity = '1';
+                    img.style.transform = 'scale(1.2)';
+
+                    const rect = icon.getBoundingClientRect();
+                    tooltip.style.top = `${rect.top - 40}px`;
+                    tooltip.style.left = `${rect.left + rect.width / 2}px`;
+                    tooltip.style.opacity = '1';
+                    tooltip.style.visibility = 'visible';
+                });
+
+                icon.addEventListener('mouseleave', () => {
+                    resetIconState(icon);
+
+                    tooltip.style.opacity = '0';
+                    tooltip.style.visibility = 'hidden';
+                });
+            });
+
+            textBoxes.forEach((box, index) => {
+                const icon = document.querySelector(`.icon-${index + 1}`);
+                const tooltip = document.getElementById(`tooltip-${index + 1}`);
+
+                box.addEventListener('mouseenter', () => {
+                    const img = icon.querySelector('.icon');
+                    img.style.opacity = '1';
+                    img.style.transform = 'scale(1.2)';
+
+                    const rect = icon.getBoundingClientRect();
+                    tooltip.style.top = `${rect.top - 40}px`;
+                    tooltip.style.left = `${rect.left + rect.width / 2}px`;
+                    tooltip.style.opacity = '1';
+                    tooltip.style.visibility = 'visible';
+                });
+
+                box.addEventListener('mouseleave', () => {
+                    resetIconState(icon);
+
+                    tooltip.style.opacity = '0';
+                    tooltip.style.visibility = 'hidden';
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="navbar">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="info.html">INFO</a></li>
+                <li><a href="archive.html">ARCHIVE</a></li>
+                <li><a href="dive.html">DIVE</a></li>
+                <li><a href="vibe.html">VIBE</a></li>
+            </ul>
+        </div>
+        <div class="hero-text">
+            <h1>VIBE</h1>
+            <p>SURF THROUGH OUR OCEAN</p>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="section">
+            <h2>OCEAN도 식후경</h2>
+            <p>오셔너가 엄선한 회사 근처 맛집을 소개합니다!</p>
+            <p>마우스를 올려 서핑해보세요.</p>
+
+            <div class="image-and-text">
+                <div class="image-container">
+                    <img src="map-final.png" alt="추천 맛집" class="custom-image">
+                    <div class="overlay-icon icon-1">
+                        <img src="coffee.png" alt="아이콘" class="icon">
+                    </div>
+                    <div class="overlay-icon icon-2">
+                        <img src="coffee.png" alt="아이콘" class="icon">
+                    </div>
+                    <div class="overlay-icon icon-3">
+                        <img src="coffee.png" alt="아이콘" class="icon">
+                    </div>
+                    <div class="overlay-icon icon-4">
+                        <img src="salad.png" alt="아이콘" class="icon">
+                    </div>
+                    <div class="overlay-icon icon-5">
+                        <img src="noodle.png" alt="아이콘" class="icon">
+                    </div>
+                    <div class="overlay-icon icon-6">
+                        <img src="hamburger.png" alt="아이콘" class="icon">
+                    </div>
+                    <div class="overlay-icon icon-7">
+                        <img src="fried-shrimp.png" alt="아이콘" class="icon">
+                    </div>
+                    <div class="overlay-icon icon-8">
+                        <img src="noodle.png" alt="아이콘" class="icon">
+                    </div>
+                    <div class="overlay-icon icon-9">
+                        <img src="pot-of-food.png" alt="아이콘" class="icon">
+                    </div>
+                    <div class="overlay-icon icon-10">
+                        <img src="hamburger.png" alt="아이콘" class="icon">
+                    </div>
+                </div>
+
+                <div class="text-box-container">
+                    <div class="text-box">
+                       <a href="https://naver.me/Fy2FHwI9" target="_blank">[카페] 프릳츠 양재점</a>
+                       <p>서울 서초구 강남대로 37길 24-11</p>
+                    </div>
+                    <div class="text-box">
+                        <a href="https://naver.me/IGJSwhJP" target="_blank">[카페] 인포메이션카페</a>
+                        <p>서울 강남구 역삼로121</p>
+                    </div>
+                    <div class="text-box">
+                        <a href="https://naver.me/xUwQ0qOH" target="_blank">[카페] 슬로우커피</a>
+                        <p>서울 강남구 역삼로136</p>
+                    </div>
+                    <div class="text-box">
+                        <a href="https://naver.me/5pwmfn1Fiy4" target="_blank">[샐러드] 피끄니크</a>
+                        <p>서울 강남구 강남대로 48길 6</p>
+                    </div>
+                    <div class="text-box">
+                        <a href="https://naver.me/GvcTzsAu" target="_blank">[막국수] 뱅뱅막국수</a>
+                        <p>서울 강남구 도곡로112</p>
+                    </div>
+                    <div class="text-box">
+                        <a href="https://naver.me/GkR3DGTq" target="_blank">[버거] 크라이치즈버거 양재역점</a>
+                        <p>서울 서초구 강남대로 41길 8</p>
+                    </div>
+                    <div class="text-box">
+                        <a href="https://naver.me/GzE4Q47J" target="_blank">[일식] 오제제 강남</a>
+                        <p>서울 강남구 강남대로 358</p>
+                    </div>
+                    <div class="text-box">
+                        <a href="https://naver.me/x2jQTdiq" target="_blank">[일식] 오무라안</a>
+                        <p>서울 강남구 논현로79길 66</p>
+                    </div>
+                    <div class="text-box">
+                        <a href="https://naver.me/G58gOOIl" target="_blank">[한식] 대낚식당</a>
+                        <p>서울 강남구 역삼로137</p>
+                    </div>
+                    <div class="text-box">
+                        <a href="https://naver.me/5iTde8cF" target="_blank">[버거] 제레미버거</a>
+                        <p>서울 강남구 남부순환로 361길 7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="divider">
+        <div class="new-section">
+            <h2>TEAM OCEAN에서 가장 조용한 팀원, 징글이를 소개합니다 :D</h2>
+            <img src="pp@2x.png" alt="핑핑이" class="pp-image">
+        </div>
+
+        <div class="tooltip" id="tooltip-1">프릳츠 양재점</div>
+        <div class="tooltip" id="tooltip-2">인포메이션카페</div>
+        <div class="tooltip" id="tooltip-3">슬로우커피</div>
+        <div class="tooltip" id="tooltip-4">피끄니크</div>
+        <div class="tooltip" id="tooltip-5">뱅뱅막국수</div>
+        <div class="tooltip" id="tooltip-6">크라이치즈버거 양재역점</div>
+        <div class="tooltip" id="tooltip-7">오제제 강남</div>
+        <div class="tooltip" id="tooltip-8">오무라안</div>
+        <div class="tooltip" id="tooltip-9">대낚식당 역삼본점</div>
+        <div class="tooltip" id="tooltip-10">제레미버거</div>
+
+        <div class="scroll-to-top">
+            <button onclick="scrollToTop()">↑</button>
+        </div>
+        <div class="back-to-home">
+            <button onclick="goHome()">Back to Home</button>
+        </div>
+    </div>
+</body>
+</html>
